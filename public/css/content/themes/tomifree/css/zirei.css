@@ -1,0 +1,87 @@
+/*事例ページのスタイル*/
+.single-case #cat-org-sns-header {
+	margin-top: 20px;
+}
+
+.column-01{
+	width:99.8%!important;
+}
+
+.zirei-01{
+	position:relative;
+}
+.zirei-01 .text-box{
+	position: absolute;
+	bottom:0;
+	right:16px;
+	text-align: right;
+}
+
+body.single-case #main section.post-content .keyword-wrap #keyword-1column{
+    width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+	body.single-case #main section.post-content .keyword-wrap .keyword-cont p.keyword-inner-p {
+		padding: 10px 30px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.zirei-01 .text-box{
+		position:static;
+	}
+	.post-content .zirei-01 p.img-photo{
+		margin:0!important;
+	}
+}
+
+@media screen and (max-width: 767px){
+.img-photo  {
+text-align: center;
+}
+}
+
+
+
+
+
+@media screen and (max-width: 767px){
+.post-content h4 {
+    color: #205a97;
+    border-left:none;
+    padding-left:0;
+}
+}
+
+.img-flow img{
+	width:60%;
+}
+
+@media screen and (max-width: 767px) {
+.img-flow img{
+	width:100%;
+}
+}
+
+.dl-image {
+	margin-bottom: 0 ;
+}
+
+.dl-text {
+	margin: 0 auto 60px !important;
+	width: 80%;
+}
+
+.dl-text a {
+	text-align: center;
+	display: block;
+	padding: 10px;
+	background: #1450aa;
+	color: #fff;
+}
+
+.dl-text a:hover {
+	color: #fff;
+	opacity: 0.8;
+}
