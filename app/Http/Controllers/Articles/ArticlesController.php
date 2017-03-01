@@ -92,7 +92,7 @@ class ArticlesController extends Controller {
         //===================================
         $articles_query = Articles::query();
         $articles_query->where('delete_flag', '=', 0);
-        $articles_query->where('id', '=', 'articles-00000001');
+        $articles_query->where('number', '=', 'articles-00000001');
         $articles = $articles_query->first();
 
 
@@ -114,6 +114,7 @@ class ArticlesController extends Controller {
         /** 画面へ渡すパラメータ設定処理 */
         //===================================
         $this->data['articles'] = $articles;
+        $this->data['articles_id'] = $articles['id'];
         $this->data['body_id'] = 'home';
         $this->data['keywords'] = $this->keywords;
         $this->data['description'] = $this->description;

@@ -1,4 +1,4 @@
-@include('layouts.css')
+@include('admin.css')
 @section('head')
 <meta charset="UTF-8">
 <title>富フリー</title>

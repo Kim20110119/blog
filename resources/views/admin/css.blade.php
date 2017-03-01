@@ -14,6 +14,62 @@
         padding: 0 !important;
     }
 </style>
+<style type="text/css">
+    form.cmxform {
+        margin:1em 0; padding:0;
+        font-size:11px;
+    }
+    form.cmxform fieldset {
+        width:370px;
+        border:0;
+        border-top:1px solid #c9dca6;
+        background:url(/content/img/css/cmxform-fieldset.gif) left bottom repeat-x;
+    }
+    form.cmxform legend {
+        padding:1em 2px 0 2px;
+        font-weight:bold;
+    }
+    form.cmxform em {
+        color:#f00;
+        background-color:transparent;
+        font-weight:normal;
+        font-style:normal;
+        font-size:.8em;
+    }
+    form.cmxform label {
+        display:block;
+        float:left;
+        width:120px;
+    }
+    form.cmxform fieldset ol {
+        margin:0;
+        padding:0;
+    }
+    form.cmxform fieldset li {
+        list-style:none;
+        clear:both;
+        margin:0; padding:5px 5px 7px 7px;
+        background:url(/content/img/css/cmxform-divider.gif) left bottom repeat-x;
+    }
+    form.cmxform fieldset fieldset {
+        border:none;
+        background:none;
+    }
+    form.cmxform fieldset fieldset legend {
+        font-weight:normal;
+        padding-left:0;
+    }
+    form.cmxform fieldset fieldset label {
+        float:none;
+        width:auto;
+    }
+    form.cmxform .sr {
+        position:absolute;
+        left:-9999px; top:0;
+        width:1px; height:1px;
+        overflow:hidden;
+    }
+</style>
 <link rel="stylesheet" id="related-post-style-css"  href="{{url('css/xeory-related/css','style.css')}}" type="text/css" media="all" />
 <link rel="stylesheet" id="ParaAdmin-css"  href="{{url('css/xeory-related/ParaAdmin/css','ParaAdmin.css')}}" type="text/css" media="all" />
 <link rel="stylesheet" id="color-picker-min-css"  href="{{url('css/admin/css','color-picker.min.css')}}" type="text/css" media="all" />

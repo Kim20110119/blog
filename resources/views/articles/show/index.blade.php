@@ -34,7 +34,7 @@
                             </ul>
                             <h1 class="post-title" itemprop="headline">{{$articles['title']}}</h1>
                             <div class="post-thumbnail">
-                                <a href="http://moppy.jp/top.php?xGVJe1dd" target="_blank"><img src="http://img.moppy.jp/pub/pc/friend/640x480-1.jpg" width="100%" alt="モッピー！お金がたまるポイントサイト"></a>
+                                <a href="{{$articles['image_link']}}" target="_blank"><img src="{{url('img/articles/'.$articles['number'],$articles['image'])}}" width="100%" alt="モッピー！お金がたまるポイントサイト"></a>
                             </div>
                         </header>
                         <!-- 記事内容 -->
