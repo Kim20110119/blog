@@ -6,6 +6,8 @@ use App\Articles;
 use App\Common\Common;
 use App\Common\Master;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Symfony\Component\HttpFoundation\Request;
 use function view;
 
 /**
@@ -92,7 +94,7 @@ class ArticlesController extends Controller {
         //===================================
         $articles_query = Articles::query();
         $articles_query->where('delete_flag', '=', 0);
-        $articles_query->where('number', '=', 'articles-00000001');
+        $articles_query->where('number', '=', 'articles-00000002');
         $articles = $articles_query->first();
 
 
@@ -140,6 +142,44 @@ class ArticlesController extends Controller {
         /** 記事画面を呼び出す */
         //===================================
         return view('articles.create.index', $this->data);
+    }
+
+    /**
+     * 記事作成画面の表示
+     *
+     * @return view 記事画面
+     */
+    public function create_confirm(Request $request) {
+        //===================================
+        /** セッションからプランIDを取得する */
+        //===================================
+        //===================================
+        /** 入力した医療施設情報を取得する */
+        //===================================
+        $articles['title'] = Input::get('title');             // 記事タイトル
+        $articles['image'] = Input::get('image');             // 記事画像
+        $articles['image_link'] = Input::get('image_link');   // 記事画像リンク
+        $articles['category'] = Input::get('category');       // 記事カテゴリ
+        $articles['keywords'] = Input::get('keywords');       // 記事キーワード
+        $articles['description'] = Input::get('description'); // 記事説明
+        $articles['content'] = Input::get('content');         // 記事内容
+        //===================================
+        /** アップロード画像を処理する */
+        //===================================
+        $articles['image'] = Common::imageUploadTemp($request->file('image'));
+
+        //===================================
+        /** 画面へ渡すパラメータ設定処理 */
+        //===================================
+        $this->data['articles'] = $articles;
+        $this->data['keywords'] = $articles['keywords'];
+        $this->data['description'] = $articles['description'];
+        $this->data['body_id'] = 'araticles';
+
+        //===================================
+        /** 記事画面を呼び出す */
+        //===================================
+        return view('articles.create.confirm', $this->data);
     }
 
     /**

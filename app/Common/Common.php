@@ -277,78 +277,40 @@ class Common {
     }
 
     /**
-     * 医療施設画像ファイルを一時アップロードする処理
+     * 画像ファイルを一時アップロードする処理
      *
-     * @param file $file アップロードする医療施設画像ファイル
+     * @param file $file アップロードする画像ファイル
      * @return view 画像ファイル名
      */
-    public static function imageUploadTempByFacility($file) {
+    public static function imageUploadTemp($file) {
         $fileName = "";
         if (!empty($file)) {
             $fileName = $file->getClientOriginalName();
-            $file->move(public_path('images/temp/temp_facility'), $fileName);
+            $file->move(public_path('img/update/temp'), $fileName);
         }
         return $fileName;
     }
 
     /**
-     * プラン画像ファイルを一時アップロードする処理
-     *
-     * @param file $file アップロードするプラン画像ファイル
-     * @return view 画像ファイル名
+     * 一時画像ファイルを移動する処理
+     * @param String $folder フォルダ名
+     * @param String $number 番号
      */
-    public static function imageUploadTempByPlan($file) {
-        $fileName = "";
-        if (!empty($file)) {
-            $fileName = $file->getClientOriginalName();
-            $file->move(public_path('images/temp/temp_plan'), $fileName);
+    public static function moveFileByFacility($folder, $number) {
+        if (!file_exists(public_path('img/' . $folder . '/' . $number))) {
+            mkdir(public_path('img/' . $folder . '/' . $number));
         }
-        return $fileName;
+        File::move(public_path('img/update/temp'), public_path('img/' . $folder . '/' . $number));
     }
 
     /**
-     * 一時医療施設画像ファイルを移動する処理
+     * 画像ファイルを削除する処理
      *
-     * @param String $facility_number 医療施設番号
+     * @param String $folder フォルダ名
+     * @param String $number 番号
      */
-    public static function moveFileByFacility($facility_number) {
-        if (!file_exists(public_path('images/upload/' . $facility_number))) {
-            mkdir(public_path('images/upload/' . $facility_number));
-        }
-        File::move(public_path('images/temp/temp_facility'), public_path('images/upload/' . $facility_number . '/facility'));
-    }
-
-    /**
-     * 療施設画像ファイルを削除する処理
-     *
-     * @param String $facility_number 医療施設番号
-     * @param String $image 医療施設画像名
-     */
-    public static function deleteFileByFacility($facility_number) {
-        File::deleteDirectory(public_path('images/upload/' . $facility_number . '/facility'));
-    }
-
-    /**
-     * 一時プラン画像ファイルを移動する処理
-     *
-     * @param String $facility_number 医療施設番号
-     * @param String $plan_id プランID
-     */
-    public static function moveFileByPlan($facility_number, $plan_id) {
-        if (!file_exists(public_path('images/upload/' . $facility_number . '/plan'))) {
-            mkdir(public_path('images/upload/' . $facility_number . '/plan'));
-        }
-        File::move(public_path('images/temp/temp_plan'), public_path('images/upload/' . $facility_number . '/plan/' . $plan_id));
-    }
-
-    /**
-     * プラン画像ファイルを移動する処理
-     *
-     * @param String $facility_number 医療施設番号
-     * @param String $plan_id プランID
-     */
-    public static function deleteFileByPlan($facility_number, $plan_id) {
-        File::deleteDirectory(public_path('images/upload/' . $facility_number . '/plan/' . $plan_id));
+    public static function deleteFileByFacility($folder, $number) {
+        File::deleteDirectory(public_path('img/' . $folder . '/' . $number));
     }
 
 }

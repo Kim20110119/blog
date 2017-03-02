@@ -13,3 +13,5 @@ Route::get('/articles', 'Articles\ArticlesController@index');
 Route::get('/articles/show', 'Articles\ArticlesController@show');
 // 記事作成画面
 Route::get('/articles/create', 'Articles\ArticlesController@create');
+// 記事作成画面
+Route::post('/articles/create_confirm', 'Articles\ArticlesController@create_confirm');
