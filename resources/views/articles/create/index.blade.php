@@ -35,7 +35,7 @@
                                 <label for="category">カテゴリ<em>*</em></label>
                                 <select id="category" name="category">
                                     @foreach($categorys as $category)
-                                    <option value="{{$category['category_en']}}">{{$category['category_jp']}}</option>
+                                    <option value="{{$category['id']}}">{{$category['category_jp']}}</option>
                                     @endforeach
                                 </select>
                             </li>

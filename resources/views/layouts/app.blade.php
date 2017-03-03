@@ -5,7 +5,7 @@
         @yield('page_css')
         @yield('noindex')
     </head>
-    <body id="top" class="post-template-default single single-post single-format-standard default" itemschope="itemscope" itemtype="http://schema.org/WebPage">
+    <body id="{{$body_id}}}" class="post-template-default single single-post single-format-standard default" itemschope="itemscope" itemtype="http://schema.org/WebPage">
         @yield('navigation')
         @yield('content')
         @yield('footer')

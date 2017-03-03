@@ -1,39 +1,22 @@
-//専門家詳細ページ-画像ギャラリー
+// ページTOPアイコン
+;(function ( $, window, document, undefined ) {
+
 $(function(){
-    $("#navi a").click(function(){
-        $("#main img").attr("src",$(this).attr("href"));
-        return false;
-    })
-})
-
-//メニュー開閉
-$('#index_area_menu').slinky();
-$('#index_area_menu2').slinky();
-
-
-//lightbox
-$('#js-gallery')
-	.packery({
-		itemSelector: '.slide',
-		gutter: 10
-	})
-	.photoSwipe('.slide', {bgOpacity: 0.8, shareEl: false}, {
-		close: function () {
-			console.log('closed');
-		}
+  $(window).scroll( function(){
+    if( $(this).scrollTop() > 150 ){
+      $('.pagetop').addClass('show');
+    } else {
+      $('.pagetop').removeClass('show');
+    }
+  });
+  $('.pagetop').click(function(){
+    var speed = 500;
+    var href= $(this).attr("href");
+    var target = $(href == "#" || href == "" ? 'html' : href);
+    var position = target.offset().top;
+    $("html, body").animate({scrollTop:position}, speed, "swing");
+    return false;
+  });
 });
 
-
-//TOPアコーディオン
-$(document).ready(function(){
-    $('.slidebox').on('click', function(){
-//        $(this).next('.row').stop(true, true).slideToggle();
-        $(this).next('.row').slideToggle();
-    });
-    $("div.row").css("display","none");
-});
-
-//アコーディオン オープン時クラス追加
-$(".p-expert_box").click(function(){
-	$(this).toggleClass("clicked");
-});
+})(jQuery, window, document);

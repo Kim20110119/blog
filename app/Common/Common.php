@@ -112,29 +112,16 @@ class Common {
     }
 
     /**
-     * 新規登録する医療施設番号を取得する
+     * 新規登録する記事番号を取得する
      *
-     * @param array $facility_number 既存最大医療施設番号
+     * @param array $articles_number 既存最大記事番号
      * @return String $str
      */
-    public static function getInsertFacilityNumber($facility_number) {
-        $pref = substr($facility_number, 0, 2);
-        $number = substr($facility_number, 2, 5);
+    public static function getInsertArticlesNumber($articles_number) {
+        $str = substr($articles_number, 0, 9);
+        $number = substr($articles_number, 9, 8);
         $int_number = intval($number) + 1;
-        return $pref . str_pad(strval($int_number), 5, "0", STR_PAD_LEFT);
-    }
-
-    /**
-     * 新規登録するプランIDを取得する
-     *
-     * @param array $plan_id 該当する医療施設の既存最大プランID
-     * @return String $str
-     */
-    public static function getInsertPlanId($plan_id) {
-        $facility_number = substr($plan_id, 0, 7);
-        $number = substr($plan_id, 7, 3);
-        $int_number = intval($number) + 1;
-        return $facility_number . str_pad(strval($int_number), 3, "0", STR_PAD_LEFT);
+        return $str . str_pad(strval($int_number), 8, "0", STR_PAD_LEFT);
     }
 
     /**
@@ -286,6 +273,7 @@ class Common {
         $fileName = "";
         if (!empty($file)) {
             $fileName = $file->getClientOriginalName();
+            $fileName = 'main' . self::commonExplode('.', $fileName)[1];
             $file->move(public_path('img/update/temp'), $fileName);
         }
         return $fileName;
@@ -296,11 +284,11 @@ class Common {
      * @param String $folder フォルダ名
      * @param String $number 番号
      */
-    public static function moveFileByFacility($folder, $number) {
+    public static function moveImageFile($folder, $number, $fileName) {
         if (!file_exists(public_path('img/' . $folder . '/' . $number))) {
             mkdir(public_path('img/' . $folder . '/' . $number));
         }
-        File::move(public_path('img/update/temp'), public_path('img/' . $folder . '/' . $number));
+        File::move(public_path('img/update/temp/' . $fileName), public_path('img/' . $folder . '/' . $number . '/' . $fileName));
     }
 
     /**
@@ -309,8 +297,8 @@ class Common {
      * @param String $folder フォルダ名
      * @param String $number 番号
      */
-    public static function deleteFileByFacility($folder, $number) {
-        File::deleteDirectory(public_path('img/' . $folder . '/' . $number));
+    public static function deleteImageFile($folder, $number, $fileName) {
+        File::deleteDirectory(public_path('img/' . $folder . '/' . $number . '/' . $fileName));
     }
 
 }
