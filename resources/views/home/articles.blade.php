@@ -4,7 +4,7 @@
         @foreach($articles_list as $articles)
         <article id="{{$articles['id']}}}" class="post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
             <figure class="post-thumbnail">
-                <a href="{{url('articles/show/'.$articles['number'])}}" rel="nofollow"><img width="400" height="250" src="{{url('img/articles/'.$articles['number'],$articles['image'])}}" class="attachment-loop_thumb size-loop_thumb wp-post-image" alt="" /></a>
+                <a href="{{url('articles/show/'.$articles['number'])}}" rel="nofollow"><img width="400" height="250" src="{{url('img/articles/'.$articles['number'].'/resize',$articles['image'])}}" class="attachment-loop_thumb size-loop_thumb wp-post-image" alt="" /></a>
             </figure>
             <header class="post-header">
                 <ul class="post-meta list-inline">

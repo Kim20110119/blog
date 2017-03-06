@@ -25,7 +25,7 @@
                             <article id="{{$articles['number']}}" class="{{$articles['number']}} post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress firstpost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
                                 <header class="post-header list-loop">
                                     <figure class="img">
-                                        <a href="{{url('articles/show/'.$articles['number'])}}" rel="nofollow"><img width="400" height="250" src="{{url('img/articles/'.$articles['number'],$articles['image'])}}" class="attachment-loop_thumb size-loop_thumb wp-post-image" alt="{{$articles['image_alt']}}" /></a>
+                                        <a href="{{url('articles/show/'.$articles['number'])}}" rel="nofollow"><img width="400" height="250" src="{{url('img/articles/'.$articles['number'].'/resize',$articles['image'])}}" class="attachment-loop_thumb size-loop_thumb wp-post-image" alt="{{$articles['image_alt']}}" /></a>
                                     </figure>
                                     <ul class="post-meta list-inline">
                                         <li class="date updated" itemprop="datePublished" datetime="{{$articles['created_at']}}">{{$common->getCreateDate($articles['created_at'])}}</li>

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
       |--------------------------------------------------------------------------
       | Application Environment
@@ -105,7 +104,6 @@ return [
       |
      */
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -130,6 +128,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -153,7 +152,6 @@ return [
       |
      */
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -188,5 +186,7 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         // HTML
         'Html' => 'Collective\Html\HtmlFacade',
+        // IMAGE
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 ];

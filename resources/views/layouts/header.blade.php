@@ -2,7 +2,7 @@
 <header id="header" class="header" role="banner" itemscope="itemscope" itemtype="http://schema.org/WPHeader">
     <div class="header-brand">
         <h1 id="logo" itemprop="headline">
-            <a href="http://kimyea.com"><img src="{{url('img/common/logo.png')}}" alt="富" /></a>
+            <a href="{{url('/')}}"><img src="{{url('img/common/logo.png')}}" alt="富" /></a>
         </h1>
         <nav id="gnav" role="navigation" itemscope="itemscope" itemtype="http://scheme.org/SiteNavigationElement">
             <div id="gnav-container" class="gnav-container">

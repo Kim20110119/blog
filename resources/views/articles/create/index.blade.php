@@ -40,6 +40,14 @@
                                 </select>
                             </li>
                             <li>
+                                <label for="recommend">お勧め<em>*</em></label>
+                                <select id="recommend" name="recommend">
+                                    @foreach($master->findRecommends() as $key => $value)
+                                    <option value="{{$key}}">{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            </li>
+                            <li>
                                 <label for="keywords">記事キーワード</label>
                                 <input id="keywords" name="keywords" size="120"/>
                             </li>

@@ -5,6 +5,7 @@ namespace App\Common;
 use App\Category;
 use DateTime;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 use function public_path;
 use function view;
 
@@ -15,6 +16,8 @@ class Common {
     const SLASH = '/';
     const MINUS = '-';
     const SPACE = ' ';
+    const IMAGE_H = 200;
+    const IMAGE_W = 200;
 
     /**
      * 指定文字区切りデータを配列に入れる処理
@@ -273,7 +276,7 @@ class Common {
         $fileName = "";
         if (!empty($file)) {
             $fileName = $file->getClientOriginalName();
-            $fileName = 'main' . self::commonExplode('.', $fileName)[1];
+            $fileName = 'main.' . self::commonExplode('.', $fileName)[1];
             $file->move(public_path('img/update/temp'), $fileName);
         }
         return $fileName;
@@ -289,6 +292,16 @@ class Common {
             mkdir(public_path('img/' . $folder . '/' . $number));
         }
         File::move(public_path('img/update/temp/' . $fileName), public_path('img/' . $folder . '/' . $number . '/' . $fileName));
+    }
+
+    /**
+     * 画像ファイルをリサイズする処理
+     * @param String $folder フォルダ名
+     * @param String $number 番号
+     */
+    public static function resizeImageFile($folder, $number, $fileName) {
+        mkdir(public_path('img/' . $folder . '/' . $number . '/resize'));
+        Image::make('img/' . $folder . '/' . $number . '/' . $fileName)->resize(400, 250)->save('img/' . $folder . '/' . $number . '/resize/' . $fileName);
     }
 
     /**

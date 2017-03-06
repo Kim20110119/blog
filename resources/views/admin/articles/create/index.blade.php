@@ -10,8 +10,10 @@
         <div class="wrap">
             <div id="main" class="col-md-8" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
                 <div class="main-inner">
-
-                    {!! Form::open(array('url' => 'articles/edit_confirm', 'method' => 'post', 'id' => 'form_facility_registConfirm', 'files' => true, 'class' => 'cmxform')) !!}
+                    <div class="home-articles-btn">
+                        <a class="btn" href="{{url('admin/articles')}}"><i class="fa fa-arrow-circle-left"></i> 記事一覧に戻る</a>
+                    </div>
+                    {!! Form::open(array('url' => 'articles/create_confirm', 'method' => 'post', 'id' => 'form_facility_registConfirm', 'files' => true, 'class' => 'cmxform')) !!}
                     <fieldset>
                         <legend>記事基本情報</legend>
                         <ol>

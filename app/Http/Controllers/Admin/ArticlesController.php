@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Articles;
+namespace App\Http\Controllers\Admin;
 
 use App\Articles;
 use App\Common\Common;
 use App\Common\Master;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -49,6 +50,7 @@ class ArticlesController extends Controller {
      * @return void
      */
     public function __construct() {
+        $this->middleware('auth');
         $this->data['categorys'] = Common::getCategoryList();
     }
 
@@ -65,7 +67,6 @@ class ArticlesController extends Controller {
         /** 記事一覧情報取得処理 */
         //===================================
         $articles_query = Articles::query();
-        $articles_query->where('delete_flag', '=', 0);
         $articles_list = $articles_query->orderBy('created_at', 'desc')->paginate(9);
         //===================================
         /** キーワードと説明の設定処理 */
@@ -82,7 +83,7 @@ class ArticlesController extends Controller {
         //===================================
         /** 記事画面を呼び出す */
         //===================================
-        return view('articles.index', $this->data);
+        return view('admin.articles.index', $this->data);
     }
 
     /**
@@ -95,10 +96,9 @@ class ArticlesController extends Controller {
         /** セッションからプランIDを取得する */
         //===================================
         //===================================
-        /** 記事一覧情報取得処理 */
+        /** 記事情報取得処理 */
         //===================================
         $articles_query = Articles::query();
-        $articles_query->where('delete_flag', '=', 0);
         $articles_query->where('number', '=', $articles_id);
         $articles = $articles_query->first();
 
@@ -129,7 +129,7 @@ class ArticlesController extends Controller {
         //===================================
         /** 記事画面を呼び出す */
         //===================================
-        return view('articles.show.index', $this->data);
+        return view('admin.articles.show.index', $this->data);
     }
 
     /**
@@ -146,7 +146,7 @@ class ArticlesController extends Controller {
         //===================================
         /** 記事画面を呼び出す */
         //===================================
-        return view('articles.create.index', $this->data);
+        return view('admin.articles.create.index', $this->data);
     }
 
     /**
@@ -178,7 +178,7 @@ class ArticlesController extends Controller {
         /** 画面へ渡すパラメータ設定処理 */
         //===================================
         $this->data['articles'] = $articles;
-        Session::put('new_articles', $articles);
+        Session::put('insert_articles', $articles);
         $this->data['keywords'] = $articles['keywords'];
         $this->data['description'] = $articles['description'];
         $this->data['body_id'] = 'araticles';
@@ -198,7 +198,7 @@ class ArticlesController extends Controller {
         //===================================
         /** セッションから医療施設情報を取得する */
         //===================================
-        $articles = Session::get('new_articles');               // 記事情報
+        $articles = Session::get('insert_articles');               // 記事情報
         //===================================
         /** 新規登録する医療施設番号を取得する */
         //===================================
@@ -243,7 +243,7 @@ class ArticlesController extends Controller {
         //===================================
         /** 記事一覧画面へリダイレクトする */
         //===================================
-        return redirect()->guest('articles');
+        return redirect()->guest('admin/articles');
     }
 
     /**
@@ -251,16 +251,64 @@ class ArticlesController extends Controller {
      *
      * @return view 記事画面
      */
-    public function edit() {
+    public function edit($articles_id) {
         //===================================
         /** セッションからプランIDを取得する */
         //===================================
+        //===================================
+        /** 記事情報取得処理 */
+        //===================================
+        $articles_query = Articles::query();
+        $articles_query->where('number', '=', $articles_id);
+        $articles = $articles_query->first();
+        //===================================
+        /** 画面へ渡すパラメータ設定処理 */
+        //===================================
+        $this->data['articles'] = $articles;
+        $this->data['articles_id'] = $articles['id'];
         $this->data['body_id'] = 'home';
 
         //===================================
         /** 記事画面を呼び出す */
         //===================================
-        return view('articles.index', $this->data);
+        return view('admin.articles.edit.index', $this->data);
+    }
+
+    /**
+     * 記事編集確認画面の表示
+     *
+     * @return view 記事編集確認画面
+     */
+    public function edit_confirm() {
+        //===================================
+        /** セッションからプランIDを取得する */
+        //===================================
+        //===================================
+        /** 入力した医療施設情報を取得する */
+        //===================================
+        $articles['number'] = Input::get('number');           // 記事番号
+        $articles['title'] = Input::get('title');             // 記事タイトル
+        $articles['image'] = Input::get('image');             // 記事画像
+        $articles['image_link'] = Input::get('image_link');   // 記事画像リンク
+        $articles['image_alt'] = Input::get('image_alt');     // 記事画像リンク
+        $articles['category'] = Input::get('category');       // 記事カテゴリ
+        $articles['keywords'] = Input::get('keywords');       // 記事キーワード
+        $articles['description'] = Input::get('description'); // 記事説明
+        $articles['content'] = Input::get('content');         // 記事内容
+        $articles['created_at'] = Input::get('created_at');   // 記事作成日付
+        //===================================
+        /** 画面へ渡すパラメータ設定処理 */
+        //===================================
+        $this->data['articles'] = $articles;
+        Session::put('update_articles', $articles);
+        $this->data['keywords'] = $articles['keywords'];
+        $this->data['description'] = $articles['description'];
+        $this->data['body_id'] = 'araticles';
+
+        //===================================
+        /** 記事画面を呼び出す */
+        //===================================
+        return view('admin.articles.edit.confirm', $this->data);
     }
 
     /**
@@ -272,29 +320,106 @@ class ArticlesController extends Controller {
         //===================================
         /** セッションからプランIDを取得する */
         //===================================
-        $this->data['body_id'] = 'home';
-
+        $articles = Session::get('update_articles');               // 記事情報
         //===================================
-        /** 記事画面を呼び出す */
+        /** 記事情報取得処理 */
         //===================================
-        return view('articles.index', $this->data);
+        $articles_query = Articles::query();
+        $articles_query->where('number', '=', $articles['number']);
+        $update_articles = $articles_query->first();
+        try {
+            // トランザクション開始
+            DB::beginTransaction();
+            //===================================
+            /** 記事情報を登録する */
+            //===================================
+            $update_articles->number = $articles['number'];           // 記事番号
+            $update_articles->category = $articles['category'];       // 記事カテゴリ
+            $update_articles->title = $articles['title'];             // 記事タイトル
+            $update_articles->content = $articles['content'];         // 記事コンテンツ
+            $update_articles->image = $articles['image'];             // 記事画像
+            $update_articles->image_link = $articles['image_link'];   // 記事画像リンク
+            $update_articles->image_alt = $articles['image_alt'];     // 記事画像説明
+            $update_articles->keywords = $articles['keywords'];       // 記事キーワード
+            $update_articles->description = $articles['description']; // 記事説明
+            $update_articles->save();
+            // コミット
+            DB::commit();
+        } catch (Exception $e) {
+            // ロールバック
+            DB::rollBack();
+            return Redirect::back();
+        }
+        //===================================
+        /** 記事一覧画面へリダイレクトする */
+        //===================================
+        return redirect()->guest('admin/articles');
     }
 
     /**
-     * 記事削除画面の表示
+     * 記事掲載を解除する
      *
      * @return view 記事画面
      */
-    public function delete() {
+    public function delete($articles_id) {
         //===================================
-        /** セッションからプランIDを取得する */
+        /** 記事情報取得処理 */
         //===================================
-        $this->data['body_id'] = 'home';
+        $articles_query = Articles::query();
+        $articles_query->where('number', '=', $articles_id);
+        $delete_articles = $articles_query->first();
+        try {
+            // トランザクション開始
+            DB::beginTransaction();
+            //===================================
+            /** 記事情報を登録する */
+            //===================================
+            $delete_articles->delete_flag = 1;  // 削除フラグ
+            $delete_articles->save();
+            // コミット
+            DB::commit();
+        } catch (Exception $e) {
+            // ロールバック
+            DB::rollBack();
+            return Redirect::back();
+        }
+        //===================================
+        /** 記事一覧画面へリダイレクトする */
+        //===================================
+        return redirect()->guest('admin/articles');
+    }
 
+    /**
+     * 記事掲載を再開する
+     *
+     * @return view 記事画面
+     */
+    public function resumption($articles_id) {
         //===================================
-        /** 記事画面を呼び出す */
+        /** 記事情報取得処理 */
         //===================================
-        return view('articles.index', $this->data);
+        $articles_query = Articles::query();
+        $articles_query->where('number', '=', $articles_id);
+        $delete_articles = $articles_query->first();
+        try {
+            // トランザクション開始
+            DB::beginTransaction();
+            //===================================
+            /** 記事情報を登録する */
+            //===================================
+            $delete_articles->delete_flag = 0;  // 削除フラグ
+            $delete_articles->save();
+            // コミット
+            DB::commit();
+        } catch (Exception $e) {
+            // ロールバック
+            DB::rollBack();
+            return Redirect::back();
+        }
+        //===================================
+        /** 記事一覧画面へリダイレクトする */
+        //===================================
+        return redirect()->guest('admin/articles');
     }
 
 }

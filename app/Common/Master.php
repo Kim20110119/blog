@@ -51,6 +51,28 @@ class Master {
     }
 
     /**
+     * お勧めフラグリストを取得する
+     *
+     * @return array $recommends
+     */
+    public static function findRecommends() {
+        return array(
+            '0' => 'いいえ',
+            '1' => 'はい',
+        );
+    }
+
+    /**
+     * キーによりお勧めフラグを取得する
+     *
+     * @param String $key
+     * @return String $recommend
+     */
+    public static function getRecommend($key) {
+        return Collection::make(Master::findRecommends())->get($key);
+    }
+
+    /**
      * キーワードを取得する
      *
      * @return String $keywords
