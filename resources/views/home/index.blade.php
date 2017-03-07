@@ -18,8 +18,6 @@
             <div id="main" class="col-md-8" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
                 <div class="main-inner">
                     @yield('articles')
-                    <!-- @yield('category') -->
-                    <!-- @yield('case') -->
                     @yield('recommend')
                 </div><!-- /main-inner -->
             </div><!-- /main -->

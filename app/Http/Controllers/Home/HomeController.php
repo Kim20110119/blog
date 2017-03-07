@@ -59,7 +59,13 @@ class HomeController extends Controller {
         /** 記事一覧情報取得処理 */
         //===================================
         $articles_query = Articles::query();
+        $articles_query->where('delete_flag', '=', 0);
         $articles_list = $articles_query->orderBy('created_at', 'desc')->paginate(9);
+
+        $recommend_query = Articles::query();
+        $recommend_query->where('delete_flag', '=', 0);
+        $recommend_query->where('recommend', '=', 1);
+        $recommend_list = $recommend_query->orderBy('created_at', 'desc')->paginate(7);
 
         //===================================
         /** キーワードと説明の設定処理 */
@@ -70,6 +76,7 @@ class HomeController extends Controller {
         /** 画面へ渡すパラメータ設定処理 */
         //===================================
         $this->data['articles_list'] = $articles_list;
+        $this->data['recommend_list'] = $recommend_list;
         $this->data['keywords'] = $this->keywords;
         $this->data['description'] = $this->description;
         //===================================

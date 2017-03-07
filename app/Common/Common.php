@@ -236,7 +236,7 @@ class Common {
      */
     public static function strRound($str, $length = 100) {
         if ($length != 0) {
-            $str = mb_strimwidth($str, 0, $length, "...");
+            $str = mb_strimwidth($str, 0, $length, "[...]");
         }
         return $str;
     }

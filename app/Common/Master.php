@@ -31,7 +31,7 @@ class Master {
      */
     public static function findCategorys() {
         return array(
-            '1' => 'ポイント',
+            '1' => 'ポイント稼ぎ',
             '2' => 'トラフィックスチェンジ',
             '3' => 'アフィリエイト',
             '4' => 'ネットビジネス',
