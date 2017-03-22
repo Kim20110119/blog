@@ -279,6 +279,11 @@ class Common {
             $fileName = 'main.' . self::commonExplode('.', $fileName)[1];
             $file->move(public_path('img/update/temp'), $fileName);
         }
+        // さくらサーバーなら画像ディレクトリをコピーする
+        if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
+            exec("cp -rf /home/kimyea/point/public/img /home/kimyea/www");
+        }
+
         return $fileName;
     }
 
@@ -292,6 +297,10 @@ class Common {
             mkdir(public_path('img/' . $folder . '/' . $number));
         }
         File::move(public_path('img/update/temp/' . $fileName), public_path('img/' . $folder . '/' . $number . '/' . $fileName));
+        // さくらサーバーなら画像ディレクトリをコピーする
+        if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
+            exec("cp -rf /home/kimyea/point/public/img /home/kimyea/www");
+        }
     }
 
     /**
@@ -301,7 +310,11 @@ class Common {
      */
     public static function resizeImageFile($folder, $number, $fileName) {
         mkdir(public_path('img/' . $folder . '/' . $number . '/resize'));
-        Image::make('img/' . $folder . '/' . $number . '/' . $fileName)->resize(400, 250)->save('img/' . $folder . '/' . $number . '/resize/' . $fileName);
+        Image::make(public_path('img/' . $folder . '/' . $number . '/' . $fileName))->resize(400, 250)->save(public_path('img/' . $folder . '/' . $number . '/resize/' . $fileName));
+        // さくらサーバーなら画像ディレクトリをコピーする
+        if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
+            exec("cp -rf /home/kimyea/point/public/img /home/kimyea/www");
+        }
     }
 
     /**
@@ -312,6 +325,10 @@ class Common {
      */
     public static function deleteImageFile($folder, $number, $fileName) {
         File::deleteDirectory(public_path('img/' . $folder . '/' . $number . '/' . $fileName));
+        // さくらサーバーなら画像ディレクトリをコピーする
+        if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN') {
+            exec("cp -rf /home/kimyea/point/public/img /home/kimyea/www");
+        }
     }
 
 }

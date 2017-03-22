@@ -8,9 +8,11 @@
 // HOME画面
 Route::get('/', 'Home\HomeController@index');
 // 記事一覧画面
-Route::get('articles', 'Articles\ArticlesController@index');
+Route::get('business', 'Business\BusinessController@index');
 // 記事一覧画面
-Route::get('articles/show/{articles_id}', 'Articles\ArticlesController@show');
+Route::get('business/articles', 'Articles\ArticlesController@index');
+// 記事一覧画面
+Route::get('business/articles/show/{articles_id}', 'Articles\ArticlesController@show');
 
 /*
   |--------------------------------------------------------------------------
@@ -18,7 +20,7 @@ Route::get('articles/show/{articles_id}', 'Articles\ArticlesController@show');
   |--------------------------------------------------------------------------
  */
 // HOME画面
-Route::get('/admin', 'Admin\HomeController@index');
+Route::get('admin', 'Admin\HomeController@index');
 // 記事一覧画面
 Route::get('admin/articles', 'Admin\ArticlesController@index');
 // 記事一覧画面

@@ -11,14 +11,12 @@
 @include('home.category')
 @include('home.case')
 @section('content')
-@yield('header')
 <div class="pages">
     <div id="content">
         <div class="wrap">
             <div id="main" class="col-md-8" role="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
                 <div class="main-inner">
-                    @yield('articles')
-                    @yield('recommend')
+                    @yield('category')
                 </div><!-- /main-inner -->
             </div><!-- /main -->
         </div><!-- /wrap -->

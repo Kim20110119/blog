@@ -13,7 +13,7 @@
                     <div class="home-articles-btn">
                         <a class="btn" href="{{url('admin/articles')}}"><i class="fa fa-arrow-circle-left"></i> 記事一覧に戻る</a>
                     </div>
-                    {!! Form::open(array('url' => 'articles/create_confirm', 'method' => 'post', 'id' => 'form_facility_registConfirm', 'files' => true, 'class' => 'cmxform')) !!}
+                    {!! Form::open(array('url' => 'admin/articles/create_confirm', 'method' => 'post', 'id' => 'form_admin_aritcles_create_confirm', 'files' => true, 'class' => 'cmxform')) !!}
                     <fieldset>
                         <legend>記事基本情報</legend>
                         <ol>
@@ -68,7 +68,11 @@
                     <textarea class="ckeditor" cols="80" id="editor1" name="content" rows="10"></textarea>
                     <script src="{{url('js/ckeditor','ckeditor.js')}}"></script>
                     <br />
-                    <p><input type="submit" value="記事確認" /></p>
+                    <div id="comments" class="comments-area">
+                        <div id="respond" class="comment-respond">
+                            <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="記事登録を確認する" /></p>
+                        </div><!-- #respond -->
+                    </div>
                     {!! Form::close() !!}
                 </div>
             </div><!-- /main-inner -->

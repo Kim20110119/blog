@@ -5,10 +5,6 @@
 @include('admin.javascript')
 @inject('common', 'App\Common\Common')
 @inject('master', 'App\Common\Master')
-@include('home.articles')
-@include('home.recommend')
-@include('home.category')
-@include('home.case')
 @section('content')
 @yield('header')
 <div class="pages">

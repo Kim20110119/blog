@@ -29,8 +29,12 @@
                             {!!$articles['content']!!}
                         </section>
                         <!-- 記事内容 -->
-                        <section class="post-content">
-                            <p><input type="submit" value="記事登録" /></p>
+                        <section class="post-content" itemprop="text">
+                            <div id="comments" class="comments-area">
+                                <div id="respond" class="comment-respond">
+                                    <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="記事新規を登録する" /></p>
+                                </div><!-- #respond -->
+                            </div>
                         </section>
                     </article>
                     {!! Form::close() !!}

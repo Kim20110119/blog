@@ -19,8 +19,8 @@
                 <h3 class="footer-01-title">カテゴリ</h3>
                 <nav class="menu-gnav2016-container">
                     <ul id="footer-gnav" class="">
-                        @foreach($categorys as $category)
-                        <li class="menu-item menu-item-type-taxonomy menu-item-object-category {{$category['category_en']}}"><a href="#">{{$category['category_jp']}}</a></li>
+                        @foreach($categorys as $key => $value)
+                        <li class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="#">{{$value}}</a></li>
                         @endforeach
                     </ul>
                 </nav>

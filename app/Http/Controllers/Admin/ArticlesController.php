@@ -164,8 +164,9 @@ class ArticlesController extends Controller {
         $articles['title'] = Input::get('title');             // 記事タイトル
         $articles['image'] = Input::get('image');             // 記事画像
         $articles['image_link'] = Input::get('image_link');   // 記事画像リンク
-        $articles['image_alt'] = Input::get('image_alt');   // 記事画像リンク
+        $articles['image_alt'] = Input::get('image_alt');     // 記事画像リンク
         $articles['category'] = Input::get('category');       // 記事カテゴリ
+        $articles['recommend'] = Input::get('recommend');     // 記事お勧め
         $articles['keywords'] = Input::get('keywords');       // 記事キーワード
         $articles['description'] = Input::get('description'); // 記事説明
         $articles['content'] = Input::get('content');         // 記事内容
@@ -186,7 +187,7 @@ class ArticlesController extends Controller {
         //===================================
         /** 記事画面を呼び出す */
         //===================================
-        return view('articles.create.confirm', $this->data);
+        return view('admin.articles.create.confirm', $this->data);
     }
 
     /**
@@ -225,6 +226,7 @@ class ArticlesController extends Controller {
             $new_articles->image_alt = $articles['image_alt'];     // 記事画像説明
             $new_articles->keywords = $articles['keywords'];       // 記事キーワード
             $new_articles->description = $articles['description']; // 記事説明
+            $new_articles->recommend = $articles['recommend'];     // 記事お勧め
             $new_articles->save();
             //===================================
             /** アップロード画像を移動する */
@@ -295,6 +297,7 @@ class ArticlesController extends Controller {
         $articles['keywords'] = Input::get('keywords');       // 記事キーワード
         $articles['description'] = Input::get('description'); // 記事説明
         $articles['content'] = Input::get('content');         // 記事内容
+        $articles['recommend'] = Input::get('recommend');     // 記事お勧め
         $articles['created_at'] = Input::get('created_at');   // 記事作成日付
         //===================================
         /** 画面へ渡すパラメータ設定処理 */
@@ -342,6 +345,7 @@ class ArticlesController extends Controller {
             $update_articles->image_alt = $articles['image_alt'];     // 記事画像説明
             $update_articles->keywords = $articles['keywords'];       // 記事キーワード
             $update_articles->description = $articles['description']; // 記事説明
+            $update_articles->recommend = $articles['recommend'];     // 記事お勧め
             $update_articles->save();
             // コミット
             DB::commit();

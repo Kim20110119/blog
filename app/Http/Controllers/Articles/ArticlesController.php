@@ -9,9 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use SebastianBergmann\RecursionContext\Exception;
-use Symfony\Component\HttpFoundation\Request;
 use function redirect;
 use function view;
 
@@ -49,7 +49,10 @@ class ArticlesController extends Controller {
      * @return void
      */
     public function __construct() {
-        $this->data['categorys'] = Common::getCategoryList();
+        $url = Request::url();
+        if (strpos($url, 'business') !== false) {
+            $this->data['categorys'] = Master::findBusinessCategorys();
+        }
     }
 
     /**

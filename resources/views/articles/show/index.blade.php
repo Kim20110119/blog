@@ -17,7 +17,7 @@
                         <header class="post-header">
                             <ul class="post-meta list-inline">
                                 <li class="date updated" itemprop="datePublished" datetime="{{$articles['created_at']}}">{{$common->getCreateDate($articles['created_at'])}}</li>
-                                <li class="cat">{{$master->getCategory($articles['category'])}}</li>
+                                <li class="cat">{{$master->getCategory($articles['category_2'])}}</li>
                             </ul>
                             <h1 class="post-title" itemprop="headline">{{$articles['title']}}</h1>
                             <div class="post-thumbnail">

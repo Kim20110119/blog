@@ -25,18 +25,15 @@ class Master {
     }
 
     /**
-     * カテゴリリストを取得する
+     * テゴリリストを取得する
      *
      * @return array $categorys
      */
     public static function findCategorys() {
         return array(
-            '1' => 'ポイント稼ぎ',
-            '2' => 'トラフィックスチェンジ',
-            '3' => 'アフィリエイト',
-            '4' => 'ネットビジネス',
-            '5' => 'SEO',
-            '6' => 'メルマガ',
+            '1' => 'ネットビジネス',
+            '2' => 'ネット知識',
+            '3' => 'ネット雑談',
         );
     }
 
@@ -48,6 +45,32 @@ class Master {
      */
     public static function getCategory($key) {
         return Collection::make(Master::findCategorys())->get($key);
+    }
+
+    /**
+     * ネットビジネスカテゴリリストを取得する
+     *
+     * @return array $business_categorys
+     */
+    public static function findBusinessCategorys() {
+        return array(
+            '1' => 'ポイント稼ぎ',
+            '2' => 'トラフィックスチェンジ',
+            '3' => 'アフィリエイト',
+            '4' => 'ネットビジネス',
+            '5' => 'SEO',
+            '6' => 'メルマガ',
+        );
+    }
+
+    /**
+     * キーによりネットビジネスカテゴリを取得する
+     *
+     * @param String $key
+     * @return String $business_category
+     */
+    public static function getBusinessCategory($key) {
+        return Collection::make(Master::findBusinessCategorys())->get($key);
     }
 
     /**

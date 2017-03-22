@@ -7,8 +7,8 @@
         <nav id="gnav" role="navigation" itemscope="itemscope" itemtype="http://scheme.org/SiteNavigationElement">
             <div id="gnav-container" class="gnav-container">
                 <ul id="gnav-ul" class="clearfix">
-                    @foreach($categorys as $category)
-                    <li id="" class="menu-item menu-item-type-taxonomy menu-item-object-category {{$category['category_en']}}"><a href="#">{{$category['category_jp']}}</a></li>
+                    @foreach($categorys as $key => $value)
+                    <li id="" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="#">{{$value}}</a></li>
                     @endforeach
                 </ul>
             </div>
