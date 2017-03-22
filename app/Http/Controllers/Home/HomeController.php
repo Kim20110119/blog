@@ -42,6 +42,7 @@ class HomeController extends Controller {
      */
     public function __construct() {
         $this->data['categorys'] = Master::findCategorys();
+        $this->data['title'] = '富フリー';
     }
 
     /**

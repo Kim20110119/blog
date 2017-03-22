@@ -42,6 +42,7 @@ class BusinessController extends Controller {
      */
     public function __construct() {
         $this->data['categorys'] = Master::findBusinessCategorys();
+        $this->data['title'] = '富フリー之ネットビジネス';
     }
 
     /**
