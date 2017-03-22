@@ -6,7 +6,6 @@ use App\Articles;
 use App\Common\Common;
 use App\Common\Master;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -51,7 +50,9 @@ class ArticlesController extends Controller {
      */
     public function __construct() {
         $this->middleware('auth');
-        $this->data['categorys'] = Common::getCategoryList();
+        $this->data['categorys_1'] = Master::findCategorys();
+        $this->data['categorys_2'] = Master::findBusinessCategorys();
+        $this->data['title'] = '記事登録';
     }
 
     /**
@@ -67,7 +68,7 @@ class ArticlesController extends Controller {
         /** 記事一覧情報取得処理 */
         //===================================
         $articles_query = Articles::query();
-        $articles_list = $articles_query->orderBy('created_at', 'desc')->paginate(9);
+        $articles_list = $articles_query->orderBy('created_at', 'desc')->get();
         //===================================
         /** キーワードと説明の設定処理 */
         //===================================
@@ -165,7 +166,8 @@ class ArticlesController extends Controller {
         $articles['image'] = Input::get('image');             // 記事画像
         $articles['image_link'] = Input::get('image_link');   // 記事画像リンク
         $articles['image_alt'] = Input::get('image_alt');     // 記事画像リンク
-        $articles['category'] = Input::get('category');       // 記事カテゴリ
+        $articles['category_1'] = Input::get('category_1');   // 記事カテゴリ01
+        $articles['category_2'] = Input::get('category_2');   // 記事カテゴリ02
         $articles['recommend'] = Input::get('recommend');     // 記事お勧め
         $articles['keywords'] = Input::get('keywords');       // 記事キーワード
         $articles['description'] = Input::get('description'); // 記事説明
@@ -218,7 +220,8 @@ class ArticlesController extends Controller {
             //===================================
             $new_articles = new Articles;
             $new_articles->number = $articles['number'];           // 記事番号
-            $new_articles->category = $articles['category'];       // 記事カテゴリ
+            $new_articles->category_1 = $articles['category_1'];   // 記事カテゴリ01
+            $new_articles->category_2 = $articles['category_2'];   // 記事カテゴリ02
             $new_articles->title = $articles['title'];             // 記事タイトル
             $new_articles->content = $articles['content'];         // 記事コンテンツ
             $new_articles->image = $articles['image'];             // 記事画像
@@ -293,7 +296,8 @@ class ArticlesController extends Controller {
         $articles['image'] = Input::get('image');             // 記事画像
         $articles['image_link'] = Input::get('image_link');   // 記事画像リンク
         $articles['image_alt'] = Input::get('image_alt');     // 記事画像リンク
-        $articles['category'] = Input::get('category');       // 記事カテゴリ
+        $articles['category_1'] = Input::get('category_1');   // 記事カテゴリ01
+        $articles['category_2'] = Input::get('category_2');   // 記事カテゴリ02
         $articles['keywords'] = Input::get('keywords');       // 記事キーワード
         $articles['description'] = Input::get('description'); // 記事説明
         $articles['content'] = Input::get('content');         // 記事内容
@@ -337,7 +341,8 @@ class ArticlesController extends Controller {
             /** 記事情報を登録する */
             //===================================
             $update_articles->number = $articles['number'];           // 記事番号
-            $update_articles->category = $articles['category'];       // 記事カテゴリ
+            $update_articles->category_1 = $articles['category_1'];   // 記事カテゴリ01
+            $update_articles->category_2 = $articles['category_2'];   // 記事カテゴリ02
             $update_articles->title = $articles['title'];             // 記事タイトル
             $update_articles->content = $articles['content'];         // 記事コンテンツ
             $update_articles->image = $articles['image'];             // 記事画像

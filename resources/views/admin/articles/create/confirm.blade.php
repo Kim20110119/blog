@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @include('layouts.head')
-@include('layouts.header')
-@include('layouts.footer')
+@include('admin.header')
 @include('layouts.javascript')
 @inject('common', 'App\Common\Common')
 @inject('master', 'App\Common\Master')
@@ -17,7 +16,7 @@
                         <!-- 記事タイトル -->
                         <header class="post-header">
                             <ul class="post-meta list-inline">
-                                <li class="cat">{{$master->getCategory($articles['category'])}}</li>
+                                <li class="cat">{{$master->getCategory($articles['category_2'])}}</li>
                             </ul>
                             <h1 class="post-title">{{$articles['title']}}</h1>
                             <div class="post-thumbnail">

@@ -34,10 +34,18 @@
                                 <input id="image_alt" name="image_alt" size="120"/>
                             </li>
                             <li>
-                                <label for="category">カテゴリ<em>*</em></label>
-                                <select id="category" name="category">
-                                    @foreach($categorys as $category)
-                                    <option value="{{$category['id']}}">{{$category['category_jp']}}</option>
+                                <label for="category_1">カテゴリ(大)<em>*</em></label>
+                                <select id="category_1" name="category_1">
+                                    @foreach($categorys_1 as $key => $value)
+                                    <option value="{{$key}}">{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            </li>
+                            <li>
+                                <label for="category_2">カテゴリ(小)<em>*</em></label>
+                                <select id="category_2" name="category_2">
+                                    @foreach($categorys_2 as $key => $value)
+                                    <option value="{{$key}}">{{$value}}</option>
                                     @endforeach
                                 </select>
                             </li>

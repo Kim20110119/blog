@@ -70,7 +70,7 @@ class ArticlesController extends Controller {
         //===================================
         $articles_query = Articles::query();
         $articles_query->where('delete_flag', '=', 0);
-        $articles_list = $articles_query->orderBy('created_at', 'desc')->paginate(9);
+        $articles_list = $articles_query->orderBy('created_at', 'desc')->get();
         //===================================
         /** キーワードと説明の設定処理 */
         //===================================
